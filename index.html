@@ -40,10 +40,11 @@ h3{font-size:21px}
 section{padding:56px 0;border-top:1px solid var(--line)}
 .lead{color:var(--muted);max-width:640px;margin-top:0}
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:28px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;isolation:isolate;transform:translateZ(0)}
+/* each card is its own steady GPU layer: without this, Chrome re-snaps playing videos (half-pixel sizes + rounded clip) when the controls hide, so they jump about 1px */
 .card .body{padding:16px 18px 18px}
 .card .body p{margin:0;color:var(--muted);font-size:15px}
-video{display:block;width:100%;aspect-ratio:16/9;background:#000;object-fit:cover}
+video{display:block;width:100%;aspect-ratio:16/9;background:#000;object-fit:cover;border-radius:13px 13px 0 0;transform:translateZ(0);backface-visibility:hidden}
 .two{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:28px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
 .price{font-family:Fraunces,serif;font-size:44px;font-weight:600;margin:4px 0 0}
